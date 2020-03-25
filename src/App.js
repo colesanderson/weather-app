@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, useEffect, useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    useLocation,
+    useHistory
+} from 'react-router-dom';
+import Main from './container/main';
+
+import mockData from './data/mock.json';
+
+function Loading() {
+    return <span>Loading...</span>;
+}
+
+function ProjectRoutes() {
+    const { pathname } = useLocation();
+    const history = useHistory();
+    const isRootLocation = pathname === '/';
+
+    useEffect(() => {
+        // If user land to root location and it will redirect to vancouver location as default
+        if (isRootLocation) {
+            history.push('vancouver');
+        }
+    }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <Switch>
+            <Route path="/:id" children={<Main weather={mockData} />} />
+        </Switch>
+    );
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Suspense fallback={<Loading />}>
+                <Router>
+                    <ProjectRoutes />
+                </Router>
+            </Suspense>
+        </div>
+    );
 }
 
 export default App;
