@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -7,8 +7,6 @@ import {
     useHistory
 } from 'react-router-dom';
 import Main from './container/main';
-
-import mockData from './data/mock.json';
 
 function Loading() {
     return <span>Loading...</span>;
@@ -28,14 +26,14 @@ function ProjectRoutes() {
 
     return (
         <Switch>
-            <Route path="/:id" children={<Main weather={mockData} />} />
+            <Route path="/:id" children={<Main />} />
         </Switch>
     );
 }
 
 function App() {
     return (
-        <div className="App">
+        <div className="p-4">
             <Suspense fallback={<Loading />}>
                 <Router>
                     <ProjectRoutes />

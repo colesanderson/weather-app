@@ -1,17 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Icon from '../../components/icon';
+import { ReactComponent as SearchIcon } from '../../static/svg/search.svg';
 
-function Search({ weather }) {
+function Search({ setCity }) {
     const [search, setSearch] = useState('');
     const { push } = useHistory();
     const inputEl = useRef(null);
-
-    const handleSearch = (event) => {
-        // TODO
-        event.preventDefault();
-
-        setSearch(event.target.value);
-    };
+    const heightInput = 45;
 
     const handleSubmit = (event) => {
         // Prevent from form to submit
@@ -21,22 +17,46 @@ function Search({ weather }) {
         if (search !== '') {
             // Push update search to URL
             push(`/${search}`);
+
+            // Set the city to container
+            setCity(search);
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                ref={inputEl}
-                type="search"
-                id="location-search"
-                name="q"
-                value={search}
-                placeholder="Vancouver"
-                onChange={handleSearch}
-            ></input>
+            <div
+                className="relative w-full border border-gray-600 rounded-lg shadow-md"
+                style={{ paddingLeft: heightInput, height: `${heightInput}px` }}
+            >
+                <input
+                    className="w-full h-12 p-2 rounded-lg"
+                    // Fix height of input so border stay visible
+                    style={{ height: `${heightInput - 2}px` }}
+                    ref={inputEl}
+                    type="search"
+                    id="location-search"
+                    value={search}
+                    placeholder="Vancouver"
+                    onChange={(event) => {
+                        setSearch(event.target.value);
+                    }}
+                ></input>
 
-            <button onClick={handleSubmit}>Search location forecast</button>
+                <button
+                    className="absolute top-0 bottom-0 left-0 flex h-full p-2 rounded-lg"
+                    onClick={handleSubmit}
+                >
+                    <Icon
+                        title="Search Icon"
+                        Icon={SearchIcon}
+                        width={30}
+                        height={30}
+                    />
+
+                    <span className="sr-only">Search location forecast</span>
+                </button>
+            </div>
         </form>
     );
 }

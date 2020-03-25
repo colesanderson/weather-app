@@ -1,22 +1,15 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import Search from '../../components/search';
 import Content from '../../components/content';
+import Header from '../../components/header';
 
-function Main({ weather }) {
-    console.log('weather', weather);
+function Main() {
+    const [city, setCity] = React.useState('');
 
     return (
-        <div>
-            <h1>Weather Forecast</h1>
+        <div className="container mx-auto">
+            <Header city={city} setCity={setCity} />
 
-            <div>
-                <span>Search for city's weather forecast.</span>
-
-                <Search />
-            </div>
-
-            <Content />
+            <Content city={city} />
         </div>
     );
 }

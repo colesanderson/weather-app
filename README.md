@@ -63,3 +63,4 @@ Weather icons from https://github.com/zagortenay333/Tempestacons.
 -   For tailwind css, I just import all tailwind css in the css file without any
     of webpack with post-css to use autoprefixer (support all browsers) and
     purgecss (to remove all unused classes).
+-   Add focus style to search input
