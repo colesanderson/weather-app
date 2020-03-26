@@ -1,39 +1,122 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import { getMonthInfo, getDayInfo } from '../../utils/index';
 import mockData from '../../data/mock.json';
+import { API_KEY } from '../../constants/index';
 
 function Content({ city }) {
-    let { id } = useParams();
+    const [cityInfo, setCityInfo] = useState({});
+    const [error, setError] = useState('');
+
+    // let { id } = useParams();
 
     console.log('city', city);
 
-    // console.log('weather', weather);
-    // console.log('test ****', test);
+    const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
 
-    // const foo = React.useMemo(() => {
-    //     return weather;
-    // }, [weather]);
-    // console.log('foo', foo);
-
-    // http://api.openweathermap.org/data/2.5/forecast?q=Vancouver&units=metric&appid=1aadcabf74bb24b2db0466ef732afac4
-
-    React.useEffect(() => {});
+    // useEffect(() => {
+    //     fetch(url)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             // TODO add error
+    //             // if (data.cod === 401) {
+    //             //     throw new Error('ERROR!');
+    //             // }
+    //             setCityInfo(data);
+    //         })
+    //         .catch((err) => {
+    //             console.log('ERROR!', err);
+    //             setError(err);
+    //         });
+    // }, [url]);
 
     if (mockData) {
+        const list = mockData.list;
+
+        // Get Current date
+        const getCurrentDate = list[0];
+        const currentMain = getCurrentDate.main;
+        const currentMainWeather = getCurrentDate.weather;
+        const currentTemp = Math.round(currentMain.temp);
+
+        // Current Date
+        const currentDate = new Date(1000 * getCurrentDate.dt);
+        const getMonth = currentDate.getMonth();
+        const getDate = currentDate.getDate();
+        const getDay = currentDate.getDay();
+        const outputMonth = getMonthInfo(getMonth);
+        const outputDay = getDayInfo(getDay);
+
+        console.log('getCurrentDate', currentMainWeather);
+
+        // Set background colour based on temperature
+        // COLD = blue
+        // WARM = orange
+        // HOT = red
+
+        let tempBgColour;
+        if (currentTemp < -20) {
+            tempBgColour = 'bg-blue-800';
+        } else if (currentTemp < -10) {
+            tempBgColour = 'bg-blue-800';
+        } else if (currentTemp < 0) {
+            tempBgColour = 'bg-blue-600';
+        } else if (currentTemp < 5) {
+            tempBgColour = 'bg-blue-400';
+        } else if (currentTemp < 10) {
+            tempBgColour = 'bg-orange-400';
+        } else if (currentTemp < 15) {
+            tempBgColour = 'bg-orange-600';
+        } else if (currentTemp < 20) {
+            tempBgColour = 'bg-orange-800';
+        } else if (currentTemp < 25) {
+            tempBgColour = 'bg-red-400';
+        } else {
+            tempBgColour = 'bg-red-800';
+        }
+
         return (
-            <div className="border border-red-500 mt-8">
-                <div>INFO SECTION</div>
+            <div className="border border-red-500 mt-8 rounded-lg text-white">
+                {/* Header */}
+                <div className={tempBgColour}>
+                    <div>
+                        {currentMainWeather.length > 0 && (
+                            <img
+                                src={`http://openweathermap.org/img/wn/${currentMainWeather[0].icon}@2x.png`}
+                                alt={currentMainWeather[0].description}
+                            />
+                        )}
 
-                <div>
-                    <div></div>
+                        {/* Icon */}
 
-                    <div></div>
+                        <h3>Today</h3>
+
+                        <span className="block">
+                            {outputDay}, {outputMonth} {getDate}
+                        </span>
+
+                        <span className="block">{currentTemp}&#8451;</span>
+
+                        {currentMainWeather.length > 0 && (
+                            <span className="block">
+                                {currentMainWeather[0].main}
+                            </span>
+                        )}
+
+                        <span className="block">
+                            Feels like {Math.round(currentMain.feels_like)}
+                            &#8451; | Wind speed{' '}
+                            {Math.round(getCurrentDate.wind.speed)} meter/sec
+                        </span>
+                    </div>
+
+                    <div>
+                        <h2>{mockData.city.name}</h2>
+                    </div>
                 </div>
 
-                <div>{mockData.city.name}</div>
-
-                <h3>ID: {id}</h3>
+                {/* Header */}
+                <div>WEEKLY CONTENT</div>
             </div>
         );
     } else {

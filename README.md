@@ -39,6 +39,8 @@ If applicable. Did you do something that you feel could have been done better in
 
 TODO
 
+-   If have time add cloud % and count how many svg clouds to background
+
 If applicable, use this area to tell us what stretch goals you attempted. What went well? What do you wish you could have done better? If you didn't attempt any of the stretch goals, feel free to let us know why.
 
 ### Instructions to run assignment locally
@@ -64,3 +66,4 @@ Weather icons from https://github.com/zagortenay333/Tempestacons.
     of webpack with post-css to use autoprefixer (support all browsers) and
     purgecss (to remove all unused classes).
 -   Add focus style to search input
+-   env variable for API key
