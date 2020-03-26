@@ -9,10 +9,6 @@ import {
 import Main from './container/main';
 import { DEFAULT_CITY } from './constants/index';
 
-function Loading() {
-    return <span>Loading...</span>;
-}
-
 function ProjectRoutes() {
     const { pathname } = useLocation();
     const history = useHistory();
@@ -34,8 +30,8 @@ function ProjectRoutes() {
 
 function App() {
     return (
-        <div className="p-4 bg-blue-100 h-screen">
-            <Suspense fallback={<Loading />}>
+        <div className="p-4 bg-blue-100 h-full min-h-screen">
+            <Suspense fallback={<span>Loading...</span>}>
                 <Router>
                     <ProjectRoutes />
                 </Router>

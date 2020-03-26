@@ -12,11 +12,8 @@ function TodayWeather({ currentData, city }) {
 
     // Current Date
     const currentDate = new Date(1000 * currentData.dt);
-    const getMonth = currentDate.getMonth();
-    const getDate = currentDate.getDate();
-    const getDay = currentDate.getDay();
-    const outputMonth = getMonthInfo(getMonth);
-    const outputDay = getDayInfo(getDay);
+    const outputMonth = getMonthInfo(currentDate.getMonth());
+    const outputDay = getDayInfo(currentDate.getDay());
 
     // Set background colour based on temperature
     const tempBgColour = getBgTemp(currentTemp);
@@ -76,7 +73,7 @@ function TodayWeather({ currentData, city }) {
                         <span className="text-2xl">Today</span>
 
                         <span className="block text-sm">
-                            {outputDay}, {outputMonth} {getDate}
+                            {outputDay}, {outputMonth} {currentDate.getDate()}
                         </span>
                     </div>
                 </div>

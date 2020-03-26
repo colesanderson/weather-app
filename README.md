@@ -19,9 +19,7 @@ To run the project locally:
 
 ### Time spent
 
-TODO
-
-How much time did you spend on the assignment? Normally, this is expressed in hours.
+10 hours
 
 ### Assumptions made
 
@@ -38,8 +36,6 @@ If applicable. Did you do something that you feel could have been done better in
 ### Stretch goals attempted
 
 TODO
-
--   If have time add cloud % and count how many svg clouds to background
 
 If applicable, use this area to tell us what stretch goals you attempted. What went well? What do you wish you could have done better? If you didn't attempt any of the stretch goals, feel free to let us know why.
 
@@ -63,4 +59,8 @@ TODO
     of webpack with post-css to use autoprefixer (support all browsers) and
     purgecss (to remove all unused classes).
 -   Add focus style to search input
--   env variable for API key
+-   refactor some reduant code
+-   use tailwind css, I have been exploring into it, sorry if the html code is bloated with tailwind classes :)
+-   Move api into backend to protect API key and set up env variable for API key
+-   add Prop types to ensure pass right types
+-   add more comments and fix naming in code to make it easier for devs to jump in code

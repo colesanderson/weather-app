@@ -45,36 +45,49 @@ export const getMonthInfo = (month) => {
     return outputMonth;
 };
 
-export const getDayInfo = (day) => {
-    let outputDay;
+export const getDayInfo = (day, isLong) => {
+    let outputDayShort;
+    let outputDayLong;
 
     switch (day) {
         case 0:
-            outputDay = 'Sun';
+            outputDayShort = 'Sun';
+            outputDayLong = 'Sunday';
             break;
         case 1:
-            outputDay = 'Mon';
+            outputDayShort = 'Mon';
+            outputDayLong = 'Monday';
             break;
         case 2:
-            outputDay = 'Tues';
+            outputDayShort = 'Tues';
+            outputDayLong = 'Tuesday';
             break;
         case 3:
-            outputDay = 'Wed';
+            outputDayShort = 'Wed';
+            outputDayLong = 'Wednesday';
             break;
         case 4:
-            outputDay = 'Thurs';
+            outputDayShort = 'Thurs';
+            outputDayLong = 'Thursday';
             break;
         case 5:
-            outputDay = 'Fri';
+            outputDayShort = 'Fri';
+            outputDayLong = 'Friday';
             break;
         case 6:
-            outputDay = 'Sat';
+            outputDayShort = 'Sat';
+            outputDayLong = 'Saturday';
             break;
         default:
-            outputDay = null;
+            outputDayShort = null;
+            outputDayLong = null;
     }
 
-    return outputDay;
+    if (isLong) {
+        return outputDayLong;
+    } else {
+        return outputDayShort;
+    }
 };
 
 export const getBgTemp = (temp) => {
