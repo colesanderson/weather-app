@@ -7,6 +7,7 @@ import {
     useHistory
 } from 'react-router-dom';
 import Main from './container/main';
+import { DEFAULT_CITY } from './constants/index';
 
 function Loading() {
     return <span>Loading...</span>;
@@ -20,7 +21,7 @@ function ProjectRoutes() {
     useEffect(() => {
         // If user land to root location and it will redirect to vancouver location as default
         if (isRootLocation) {
-            history.push('vancouver');
+            history.push(DEFAULT_CITY);
         }
     }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 

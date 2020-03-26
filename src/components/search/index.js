@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Icon from '../../components/icon';
 import { ReactComponent as SearchIcon } from '../../static/svg/search.svg';
+import { DEFAULT_CITY } from '../../constants/index';
 
 function Search({ setCity }) {
     const [search, setSearch] = useState('');
@@ -37,7 +38,7 @@ function Search({ setCity }) {
                     type="search"
                     id="location-search"
                     value={search}
-                    placeholder="Vancouver"
+                    placeholder={DEFAULT_CITY}
                     onChange={(event) => {
                         setSearch(event.target.value);
                     }}
