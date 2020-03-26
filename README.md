@@ -6,9 +6,30 @@ March 26, 2020
 
 ### Location of deployed application
 
-Production Url: TODO
+Production Url: http://very-cool-weather-app.surge.sh/
 
 Github Url: https://github.com/colesanderson/weather-app
+
+### Time spent
+
+10 hours
+
+### Assumptions made
+
+-   First, I looked at the API to see what data was available for me to use on the web app.
+-   After that I wrote down all the features that I wanted to include in the web app with the data.
+-   I then Googled "weather web app design" and found two to three designs that I liked and used them as inspiration to create my own design with the features that I wanted to include.
+-   Drew my own wireframe on paper for my design to move from desktop -> mobile.
+-   Started coding from there!
+-   For this app I used Tailwind css, I have been exploring more with this lately, sorry if the html code is bloated with tailwind classes :)
+
+### Stretch goals attempted
+
+-   Added Cloud count to background.
+-   Added colour background based on the temperature (need some work with colour choices).
+-   Would have liked to add Geolocation to get the user's location; however, I would need more time to work on that.
+
+### Instructions to run assignment locally
 
 To run the project locally:
 
@@ -17,50 +38,17 @@ To run the project locally:
 3. Run `npm start` to run the app in the development mode.
 4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Time spent
-
-10 hours
-
-### Assumptions made
-
-TODO
-
-Use this section to tell us about any assumptions that you made when creating your solution.
-
-### Shortcuts/Compromises made
-
-TODO
-
-If applicable. Did you do something that you feel could have been done better in a real-world application? Please let us know.
-
-### Stretch goals attempted
-
-TODO
-
-If applicable, use this area to tell us what stretch goals you attempted. What went well? What do you wish you could have done better? If you didn't attempt any of the stretch goals, feel free to let us know why.
-
-### Instructions to run assignment locally
-
-TODO
-
-If applicable, please provide us with the necessary instructions to run your solution.
-
 ### What did you not include in your solution that you want us to know about?
 
-TODO
-
-Were you short on time and not able to include something that you want us to know about? Please list it here so that we know that you considered it.
+-   For tailwind CSS, I imported all the tailwind CSS in the CSS file without any of the webpack with post-css to use autoprefixer (support all browsers) and purgecss (to remove all unused classes).
+-   Add a focus style to search input.
+-   Refactor some reduant code.
+-   Add Prop types to ensure pass right types
+-   Add more comments and fix naming in the code to make it easier for other devs to jump into the code
+-   Add search results from city options API to output cities to avoid "no city found"
+-   Move api into backend to protect API key and set up env variable for API key
+-   Add geolocation based on users location
 
 ### Other information about your submission that you feel it's important that we know if applicable.
 
-TODO
-
--   For tailwind css, I just import all tailwind css in the css file without any
-    of webpack with post-css to use autoprefixer (support all browsers) and
-    purgecss (to remove all unused classes).
--   Add focus style to search input
--   refactor some reduant code
--   use tailwind css, I have been exploring into it, sorry if the html code is bloated with tailwind classes :)
--   Move api into backend to protect API key and set up env variable for API key
--   add Prop types to ensure pass right types
--   add more comments and fix naming in code to make it easier for devs to jump in code
+-   Icons from https://material.io/resources/icons/?style=baseline
