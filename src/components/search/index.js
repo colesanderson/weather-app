@@ -26,7 +26,7 @@ function Search({ setCity }) {
     return (
         <form onSubmit={handleSubmit}>
             <div
-                className="relative w-full border border-gray-600 rounded-lg shadow-md"
+                className="relative w-full border border-gray-600 bg-white rounded-lg shadow-md"
                 style={{ paddingLeft: heightInput, height: `${heightInput}px` }}
             >
                 <input

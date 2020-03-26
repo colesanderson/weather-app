@@ -33,7 +33,7 @@ function ProjectRoutes() {
 
 function App() {
     return (
-        <div className="p-4">
+        <div className="p-4 bg-blue-100 h-screen">
             <Suspense fallback={<Loading />}>
                 <Router>
                     <ProjectRoutes />

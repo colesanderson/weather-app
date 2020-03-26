@@ -76,3 +76,27 @@ export const getDayInfo = (day) => {
 
     return outputDay;
 };
+
+export const getBgTemp = (temp) => {
+    let outputBgTemp;
+
+    if (temp <= -30) {
+        outputBgTemp = 'bg-blue-800';
+    } else if (temp <= -10) {
+        outputBgTemp = 'bg-blue-600';
+    } else if (temp <= -5) {
+        outputBgTemp = 'bg-teal-800';
+    } else if (temp <= 0) {
+        outputBgTemp = 'bg-teal-600';
+    } else if (temp <= 5) {
+        outputBgTemp = 'bg-yellow-600';
+    } else if (temp <= 10) {
+        outputBgTemp = 'bg-orange-600';
+    } else if (temp <= 20) {
+        outputBgTemp = 'bg-red-600';
+    } else {
+        outputBgTemp = 'bg-red-800';
+    }
+
+    return outputBgTemp;
+};

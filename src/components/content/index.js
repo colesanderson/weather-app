@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMonthInfo, getDayInfo } from '../../utils/index';
+import { getMonthInfo, getDayInfo, getBgTemp } from '../../utils/index';
 import mockData from '../../data/mock.json';
 import { API_KEY } from '../../constants/index';
+import TodayWeather from './today-weather';
 
 function Content({ city }) {
     const [cityInfo, setCityInfo] = useState({});
     const [error, setError] = useState('');
 
     // let { id } = useParams();
-
-    console.log('city', city);
-
     const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
 
     // useEffect(() => {
@@ -30,97 +28,58 @@ function Content({ city }) {
     //         });
     // }, [url]);
 
-    if (mockData) {
+    console.log('testing cityInfo', mockData);
+
+    // Error from API request
+    if (error) {
+        return (
+            <div className="p-8 text-center">
+                <h2 className="text-6xl">Error!!</h2>
+            </div>
+        );
+    }
+
+    // Api looks good and render city!
+    if (Object.keys(mockData).length !== 0 && mockData.cod !== '404') {
         const list = mockData.list;
 
-        // Get Current date
-        const getCurrentDate = list[0];
-        const currentMain = getCurrentDate.main;
-        const currentMainWeather = getCurrentDate.weather;
-        const currentTemp = Math.round(currentMain.temp);
-
-        // Current Date
-        const currentDate = new Date(1000 * getCurrentDate.dt);
-        const getMonth = currentDate.getMonth();
-        const getDate = currentDate.getDate();
-        const getDay = currentDate.getDay();
-        const outputMonth = getMonthInfo(getMonth);
-        const outputDay = getDayInfo(getDay);
-
-        console.log('getCurrentDate', currentMainWeather);
-
-        // Set background colour based on temperature
-        // COLD = blue
-        // WARM = orange
-        // HOT = red
-
-        let tempBgColour;
-        if (currentTemp < -20) {
-            tempBgColour = 'bg-blue-800';
-        } else if (currentTemp < -10) {
-            tempBgColour = 'bg-blue-800';
-        } else if (currentTemp < 0) {
-            tempBgColour = 'bg-blue-600';
-        } else if (currentTemp < 5) {
-            tempBgColour = 'bg-blue-400';
-        } else if (currentTemp < 10) {
-            tempBgColour = 'bg-orange-400';
-        } else if (currentTemp < 15) {
-            tempBgColour = 'bg-orange-600';
-        } else if (currentTemp < 20) {
-            tempBgColour = 'bg-orange-800';
-        } else if (currentTemp < 25) {
-            tempBgColour = 'bg-red-400';
-        } else {
-            tempBgColour = 'bg-red-800';
-        }
+        console.log('list', list);
 
         return (
-            <div className="border border-red-500 mt-8 rounded-lg text-white">
-                {/* Header */}
-                <div className={tempBgColour}>
-                    <div>
-                        {currentMainWeather.length > 0 && (
-                            <img
-                                src={`http://openweathermap.org/img/wn/${currentMainWeather[0].icon}@2x.png`}
-                                alt={currentMainWeather[0].description}
-                            />
-                        )}
+            <div className="border bg-white mt-8 rounded-lg">
+                <TodayWeather currentData={list[0]} city={mockData.city.name} />
 
-                        {/* Icon */}
-
-                        <h3>Today</h3>
-
-                        <span className="block">
-                            {outputDay}, {outputMonth} {getDate}
-                        </span>
-
-                        <span className="block">{currentTemp}&#8451;</span>
-
-                        {currentMainWeather.length > 0 && (
-                            <span className="block">
-                                {currentMainWeather[0].main}
-                            </span>
-                        )}
-
-                        <span className="block">
-                            Feels like {Math.round(currentMain.feels_like)}
-                            &#8451; | Wind speed{' '}
-                            {Math.round(getCurrentDate.wind.speed)} meter/sec
-                        </span>
-                    </div>
-
-                    <div>
-                        <h2>{mockData.city.name}</h2>
-                    </div>
-                </div>
-
-                {/* Header */}
                 <div>WEEKLY CONTENT</div>
             </div>
         );
+    } else if (cityInfo.cod === '404') {
+        // City not found!
+        return (
+            <div className="p-8 text-center">
+                <h2 className="text-6xl">City not found</h2>
+                <p>Please search again.</p>
+            </div>
+        );
     } else {
-        return <div>TODO???</div>;
+        return (
+            // Copy code from https://loading.io/css/ to save time
+            <div className="text-center p-8">
+                <div class="lds-spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        );
     }
 }
 
